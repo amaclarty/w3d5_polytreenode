@@ -51,16 +51,18 @@ class PolyTreeNode
     end
 
     def bfs(target)
-        # return self if self.value == target
-        queue = []
-        queue.push(self)
-        queue.each do |node|
-            1st = queue.shift
-            return 1st if 1st.value == target 
-            node.child.bfs(target)
-        end    
-        nil     
+        queue = [self]
+        while !queue.empty?
+            # debugger
+            el = queue.shift
+            return el if target == el.value
+            if !el.children.empty?
+                el.children.each {|child_node| queue << child_node }
+            end
+        end
+        nil
     end
+
 
 
 
@@ -82,8 +84,8 @@ class PolyTreeNode
 
 
     attr_reader :parent, :children, :value
-end 
 
+end
 # class Array 
     
 
